@@ -11,7 +11,7 @@ window.addEventListener('load', () => {
 
     document.getElementById('gridd').classList.add('imagenes-cargadas');
 
-
+    // Aqui los listener de los enlaces 
     const enlaces = document.querySelectorAll('#categorias a')
     enlaces.forEach((elem) => {
         // console.log(elem);
@@ -21,9 +21,16 @@ window.addEventListener('load', () => {
             e.target.classList.add('activo');
 
             // funcion de filtrar 
-            const categoria = e.target.innerHTML;
+            const categoria = e.target.innerHTML.toLowerCase();
             console.log(categoria);
-            
+            categoria === 'todos' ? grid.filter('[data-categoria]') : grid.filter(`[data-categoria="${categoria}"]`)
+
         });
+        // listener de la barra de busqueda
+    });
+    document.querySelector('#barra-busqueda').addEventListener('input', (e) => {
+        const busqueda = e.target.value;
+        // console.log(busqueda);
+grid.filter((item) => item.getElement().dataset.etiquetas.includes(busqueda) ); 
     });
 });
